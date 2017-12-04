@@ -13,7 +13,7 @@ public class Category {
 
     //Set the relationship you want
     @ManyToMany(mappedBy = "categories")
-    private Set<Ingredient> ingredients;
+    private Set<Recipe> recipes;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class Category {
         this.description = description;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public Set<Recipe> getRecipes() {
+        return recipes;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }
