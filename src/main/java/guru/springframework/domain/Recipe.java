@@ -1,5 +1,7 @@
 package guru.springframework.domain;
 
+import guru.springframework.domain.enums.Dificulty;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -28,6 +30,18 @@ public class Recipe {
     //Save relationship in the child class
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
+
+    //Save as ordinal or string | Ordinal is the default
+    //Try to use string to avoid data issues when changing enums.
+    @Enumerated(value = EnumType.STRING)
+    private Dificulty dificulty;
+
+    //Just need to add in one. Used mapped by in the other method
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+        joinColumns = @JoinColumn(name = "recipe_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
     public Recipe() {
     }
@@ -94,5 +108,29 @@ public class Recipe {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Dificulty getDificulty() {
+        return dificulty;
+    }
+
+    public void setDificulty(Dificulty dificulty) {
+        this.dificulty = dificulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
