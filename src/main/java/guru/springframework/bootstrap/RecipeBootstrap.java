@@ -5,6 +5,7 @@ import guru.springframework.domain.enums.Dificulty;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
@@ -33,6 +35,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     private List<Recipe> getRecipes(){
+
+        log.debug("Start adding recipes");
 
         List<Recipe> recipes = new ArrayList<>(2);
 
@@ -55,8 +59,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("My notees");
-
-        guacRecipe.setNotes(guacNotes);
+        guacRecipe.addNotes(guacNotes);
 
         guacRecipe.addIngredient(new Ingredient("Ripe avocados", new BigDecimal(2), eachUnitOfMeasure))
                 .addIngredient(new Ingredient("Kosher salt", new BigDecimal(.5), teaSpoonUnitOfMeasure))
@@ -68,6 +71,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.getCategories().add(americanCategory);
         recipes.add(guacRecipe);
+
+        log.debug("Added recipes");
 
         return recipes;
 
