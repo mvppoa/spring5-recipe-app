@@ -8,12 +8,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
@@ -40,6 +40,25 @@ public class RecipeServiceImplTest {
         Set<Recipe> recipeSet = recipeService.getRecipes();
         assertEquals(1,recipeSet.size());
         verify(recipeRepository,times(1)).findAll();
+
+    }
+
+    @Test
+    public void getRecipeById(){
+
+        Long recipeId = 1L;
+
+        Recipe recipe = new Recipe();
+        recipe.setId(recipeId);
+        Optional<Recipe> optionalRecipe = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
+
+        Recipe resultRecipe = recipeService.findById(recipeId);
+        assertNotNull("Null recipe returned", resultRecipe);
+
+        verify(recipeRepository,times(1)).findById(anyLong());
+        verify(recipeRepository,never()).findAll();
 
     }
 }

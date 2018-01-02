@@ -40,6 +40,7 @@
                                 <td><a href="#">View</a></td>
                             </tr>
                             <tr th:each="recipe : ${recipes}">
+                                <!--add hint do thymleaf knows what object to use-->
                                 <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
                                 <td th:text="${recipe.id}">334</td>
                                 <td th:text="${recipe.description}">Tasty Goodnees 3</td>

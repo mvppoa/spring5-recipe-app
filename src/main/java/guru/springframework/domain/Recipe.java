@@ -22,8 +22,10 @@ public class Recipe {
 
     private String description;
     private Integer prepTime;
+    private Integer serving;
     private Integer cookingTime;
-    private String source;
+    private Integer source;
+    private String url;
 
     public Recipe() {
     }

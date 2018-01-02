@@ -54,7 +54,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.setDescription("Perfect Guacamole");
         guacRecipe.setPrepTime(10);
         guacRecipe.setCookingTime(0);
+        guacRecipe.setServing(4);
         guacRecipe.setDificulty(Dificulty.EASY);
+        guacRecipe.setSource(30);
+        guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
         guacRecipe.setDirections("Shit pickle");
 
         Notes guacNotes = new Notes();
